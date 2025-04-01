@@ -97,16 +97,7 @@ with col_enlaces:
             # Rellenar con espacios en blanco para mantener la alineación
             for _ in range(max_items - len(enlaces)):
                 st.markdown("&nbsp;")
-
-# 💰 Calculadora de Reembolsos y botones adicionales (Columna derecha, ahora más estrecha)
-with col_calculadora:
-    st.header("💰 Calculadora de Reembolsos")
-    monto = st.number_input("Monto a devolver", min_value=0.0, format="%.2f")
-    porcentaje = st.number_input("% Comisión del proveedor", min_value=0.01, max_value=100.0, format="%.2f")
-    if st.button("Calcular"):
-        total_a_devolver = monto / ((100 - porcentaje) / 100)
-        st.success(f"Total a devolver: ${total_a_devolver:.2f}")
-    
+   
     st.markdown("---")
     st.link_button("INFO EMV", "https://esuezhg4oon.typeform.com/InfoCC", use_container_width=True)
     
