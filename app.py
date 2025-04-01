@@ -5,7 +5,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 # ✅ Configuración de la página
-st.set_page_config(page_title="Portal de Guías", layout="wide")
+st.set_page_config(page_title="Centro de Atención al Cliente", layout="wide")
 
 # 🔧 Ocultar la barra superior y el menú de Streamlit
 hide_streamlit_style = """
@@ -27,7 +27,7 @@ client = gspread.authorize(credentials)
 
 # 📂 Cargar datos desde Google Sheets
 SHEET_ID = "1kBLQAdhYbnP8HTUgpr_rmmGEaOdyMU2tI97ogegrGxY"
-SHEET_NAME = "Guias"
+SHEET_NAME = "Enlaces"
 sheet = client.open_by_key(SHEET_ID).worksheet(SHEET_NAME)
 
 def cargar_enlaces():
@@ -52,7 +52,7 @@ with st.sidebar:
                 with st.form("Agregar Enlace"):
                     nombre = st.text_input("Nombre del Enlace")
                     url = st.text_input("URL")
-                    categoria = st.selectbox("Categoría", ["Sistemas EMV", "Otros Enlaces"])
+                    categoria = st.selectbox("Categoría", ["Sistemas EMV", "EMV - SIRE", "Datos x Agente", "Happy Faces", "Otros Enlaces"])
                     enviar = st.form_submit_button("Guardar Enlace")
                     
                     if enviar:
@@ -70,7 +70,7 @@ with col_enlaces:
     st.image("https://github.com/ivan-emv/acceso-agentes/blob/main/a1.png?raw=true", width=500)
     
     st.header("🔗 Accesos Rápidos")
-    categorias_validas = ["Sistemas EMV", "Otros Enlaces"]
+    categorias_validas = ["Sistemas EMV", "EMV - SIRE", "Datos x Agente", "Happy Faces", "Otros Enlaces"]
     categorias = {cat: [] for cat in categorias_validas}
     
     for _, row in enlaces_df.iterrows():
@@ -84,8 +84,8 @@ with col_enlaces:
     # Asegurar la alineación de los botones agregando placeholders vacíos
     max_items = max(len(cat) for cat in categorias.values())
     
-    col1, col2 = st.columns(2)
-    columnas = [col1, col2]
+    col1, col2, col3, col4, col5 = st.columns(5)
+    columnas = [col1, col2, col3, col4, col5]
     
     for i, categoria in enumerate(categorias_validas):
         with columnas[i]:
@@ -97,7 +97,11 @@ with col_enlaces:
             # Rellenar con espacios en blanco para mantener la alineación
             for _ in range(max_items - len(enlaces)):
                 st.markdown("&nbsp;")
-   
+
+# 💰 Calculadora de Reembolsos y botones adicionales (Columna derecha, ahora más estrecha)
+with col_calculadora:
+    st.header("Accesos Reservas y TR")
+    
     st.markdown("---")
     st.link_button("INFO EMV", "https://esuezhg4oon.typeform.com/InfoCC", use_container_width=True)
     
