@@ -84,7 +84,7 @@ with col_enlaces:
     # Asegurar la alineación de los botones agregando placeholders vacíos
     max_items = max(len(cat) for cat in categorias.values())
     
-    col1, col2 = st.columns(5)
+    col1, col2 = st.columns(2)
     columnas = [col1, col2]
     
     for i, categoria in enumerate(categorias_validas):
